@@ -6,8 +6,8 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/graphql-go/graphql/gqlerrors"
-	"github.com/graphql-go/graphql/language/ast"
+	"github.com/housinganywhere/graphql/gqlerrors"
+	"github.com/housinganywhere/graphql/language/ast"
 	"golang.org/x/net/context"
 )
 
@@ -397,10 +397,10 @@ func doesFragmentConditionMatch(eCtx *ExecutionContext, fragment ast.Node, ttype
 		if conditionalType == ttype {
 			return true
 		}
-                if conditionalType.Name() == ttype.Name() {
+		if conditionalType.Name() == ttype.Name() {
 			return true
 		}
-		
+
 		if conditionalType, ok := conditionalType.(Abstract); ok {
 			return conditionalType.IsPossibleType(ttype)
 		}

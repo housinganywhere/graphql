@@ -6,7 +6,7 @@ import (
 	"reflect"
 	"regexp"
 
-	"github.com/graphql-go/graphql/language/ast"
+	"github.com/housinganywhere/graphql/language/ast"
 	"golang.org/x/net/context"
 )
 
