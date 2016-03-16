@@ -2,6 +2,7 @@ package lexer
 
 import (
 	"fmt"
+	"unicode"
 
 	"github.com/housinganywhere/graphql/gqlerrors"
 	"github.com/housinganywhere/graphql/language/source"
@@ -387,17 +388,29 @@ func readToken(s *source.Source, fromPosition int) (Token, error) {
 		}
 		return token, nil
 	}
-	description := fmt.Sprintf("Unexpected character \"%c\".", code)
+
+	if ok := unicode.IsLetter(rune(code)); ok == true {
+		return readName(s, position), nil
+	}
+
+	description := fmt.Sprintf("Unexpected character \"%d\".", code)
 	return Token{}, gqlerrors.NewSyntaxError(s, position, description)
 }
 
 func charCodeAt(body string, position int) rune {
-	r := []rune(body)
-	if len(r) > position {
-		return r[position]
-	} else {
-		return 0
+	// r := []rune(body)
+	// if len(r) > position {
+	// 	return r[position]
+	// } else {
+	// 	return 0
+	// }
+	// This is slow and dirty solution. WIP.
+	for i, c := range body {
+		if i == position {
+			return c
+		}
 	}
+	return 0
 }
 
 // Reads from body starting at startPosition until it finds a non-whitespace
