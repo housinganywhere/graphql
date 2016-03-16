@@ -393,17 +393,8 @@ func readToken(s *source.Source, fromPosition int) (Token, error) {
 }
 
 func charCodeAt(body string, position int) rune {
-	// r := []rune(body)
-	// if len(r) > position {
-	// 	return r[position]
-	// } else {
-	// 	return 0
-	// }
-	// This is slow and dirty solution. WIP.
-	for i, c := range body {
-		if i == position {
-			return c
-		}
+	if len(body) > position {
+		return rune(body[position])
 	}
 	return 0
 }
