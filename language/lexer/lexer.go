@@ -2,7 +2,6 @@ package lexer
 
 import (
 	"fmt"
-	"unicode"
 
 	"github.com/housinganywhere/graphql/gqlerrors"
 	"github.com/housinganywhere/graphql/language/source"
@@ -389,11 +388,7 @@ func readToken(s *source.Source, fromPosition int) (Token, error) {
 		return token, nil
 	}
 
-	if ok := unicode.IsLetter(rune(code)); ok == true {
-		return readName(s, position), nil
-	}
-
-	description := fmt.Sprintf("Unexpected character \"%d\".", code)
+	description := fmt.Sprintf("Unexpected character \"%c\".", code)
 	return Token{}, gqlerrors.NewSyntaxError(s, position, description)
 }
 
