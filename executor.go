@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"reflect"
+	"runtime/debug"
 	"strings"
 
 	"github.com/housinganywhere/graphql/gqlerrors"
@@ -44,6 +45,8 @@ func Execute(p ExecuteParams) (result *Result) {
 
 	defer func() {
 		if r := recover(); r != nil {
+			fmt.Println("ERROR caught in graphql (Executor):", r)
+			fmt.Println(string(debug.Stack()))
 			var err error
 			if r, ok := r.(error); ok {
 				err = gqlerrors.FormatError(r)
@@ -480,6 +483,8 @@ func resolveField(eCtx *ExecutionContext, parentType *Object, source interface{}
 	var returnType Output
 	defer func() (interface{}, resolveFieldResultState) {
 		if r := recover(); r != nil {
+			fmt.Println("ERROR caught in graphql (resolveField):", r)
+			fmt.Println(string(debug.Stack()))
 
 			var err error
 			if r, ok := r.(string); ok {
@@ -556,6 +561,8 @@ func completeValueCatchingError(eCtx *ExecutionContext, returnType Type, fieldAS
 	// catch panic
 	defer func() interface{} {
 		if r := recover(); r != nil {
+			fmt.Println("ERROR caught in graphql (completeValueCatchingError):", r)
+			fmt.Println(string(debug.Stack()))
 			//send panic upstream
 			if _, ok := returnType.(*NonNull); ok {
 				panic(r)
