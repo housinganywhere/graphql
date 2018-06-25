@@ -1,6 +1,7 @@
 package graphql_test
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -11,7 +12,6 @@ import (
 	"github.com/housinganywhere/graphql/gqlerrors"
 	"github.com/housinganywhere/graphql/language/location"
 	"github.com/housinganywhere/graphql/testutil"
-	"golang.org/x/net/context"
 )
 
 func TestExecutesArbitraryCode(t *testing.T) {

@@ -1,10 +1,10 @@
 package graphql
 
 import (
+	"context"
 	"github.com/housinganywhere/graphql/gqlerrors"
 	"github.com/housinganywhere/graphql/language/parser"
 	"github.com/housinganywhere/graphql/language/source"
-	"golang.org/x/net/context"
 )
 
 type Params struct {

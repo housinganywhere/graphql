@@ -1,6 +1,7 @@
 package graphql
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"reflect"
@@ -9,7 +10,6 @@ import (
 
 	"github.com/housinganywhere/graphql/gqlerrors"
 	"github.com/housinganywhere/graphql/language/ast"
-	"golang.org/x/net/context"
 )
 
 type ExecuteParams struct {

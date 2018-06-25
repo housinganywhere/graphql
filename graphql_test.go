@@ -1,12 +1,12 @@
 package graphql_test
 
 import (
+	"context"
 	"reflect"
 	"testing"
 
 	"github.com/housinganywhere/graphql"
 	"github.com/housinganywhere/graphql/testutil"
-	"golang.org/x/net/context"
 )
 
 type T struct {
